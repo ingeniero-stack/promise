@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <title>Fetch Data from API</title>
+  </head>
+  <body>
+    <table id="products-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Category</th>
+        </tr>
+      </thead>
+      <tbody id="products-body">
+      </tbody>
+    </table>
+
+    <script>
+      const tableBody = document.querySelector("#products-body");
+
+      fetch("https://dummyjson.com/api/products")
+        .then((response) => response.json())
+        .then((data) => {
+          data.forEach((product) => {
+            const row = `
+              <tr>
+                <td>${product.name}</td>
+                <td>${product.price}</td>
+                <td>${product.category}</td>
+              </tr>
+            `;
+            tableBody.innerHTML += row;
+          });
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    </script>
+  </body>
+</html>
